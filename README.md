@@ -1,0 +1,138 @@
+# Laravel Settings Package
+
+A flexible Laravel package for managing scoped, typed settings with a manifesto-based configuration approach.
+
+## Features
+
+- **Scoped Settings**: Associate settings with specific models or application segments
+- **Type Safety**: Automatic type casting and validation for various data types
+- **Manifesto-Based**: Single source of truth for settings structure and defaults
+- **Default Values**: Settings are stored in config until changed, preventing database clutter
+- **Flexible Organization**: Support for nested groups and dot notation access
+- **Model Integration**: Easy integration with Eloquent models via the `HasSettings` trait
+
+## Supported Types
+
+- Integer
+- Double
+- Boolean
+- String
+- Array
+- Collection (Illuminate\Support\Collection)
+- Datetime (Carbon instances)
+- Object
+
+## Installation
+
+Install the package via Composer:
+
+```bash
+composer require jomigomes/laravel-settings
+```
+
+Publish the configuration file:
+
+```bash
+php artisan vendor:publish --tag=settings-config
+```
+
+Publish and run the migration:
+
+```bash
+php artisan vendor:publish --tag=settings-migrations
+php artisan migrate
+```
+
+## Configuration
+
+The package uses a "manifesto" file (`config/settings.php`) as the single source of truth for all settings. Define your settings structure here:
+
+```php
+use YellowParadox\LaravelSettings\Models\Setting;
+
+return [
+    'system' => [
+        'features' => [
+            'enable_notifications' => [
+                'value' => true,
+                'type' => Setting::TYPE_BOOLEAN,
+            ],
+        ],
+    ],
+    
+    'user' => [
+        'preferences' => [
+            'theme' => [
+                'value' => 'light',
+                'type' => Setting::TYPE_STRING,
+            ],
+        ],
+    ],
+];
+```
+
+## Usage
+
+### Non-Model Related Settings
+
+```php
+use YellowParadox\LaravelSettings\Models\Setting;
+
+// Get a setting
+$setting = Setting::get('features.enable_notifications', 'system');
+
+// Set a setting
+Setting::set('features.enable_notifications', false, 'system');
+
+// Get all settings for a scope
+$allSettings = Setting::getAllScoped('system');
+```
+
+### Model Related Settings
+
+First, add the `HasSettings` trait to your model:
+
+```php
+use YellowParadox\LaravelSettings\Traits\HasSettings;
+
+class User extends Model
+{
+    use HasSettings;
+}
+```
+
+Then use settings with your model:
+
+```php
+$user = User::find(1);
+
+// Get a setting
+$theme = $user->getSetting('preferences.theme');
+
+// Set a setting
+$user->setSetting('preferences.theme', 'dark');
+
+// Get all settings
+$allSettings = $user->getAllSettings();
+
+// Get filtered settings
+$preferences = $user->getFilteredSettings('preferences');
+```
+
+## Documentation
+
+For complete documentation, see the [Settings.md](docs/Settings.md) file included in this package.
+
+## Testing
+
+```bash
+composer test
+```
+
+## License
+
+This package is open-sourced software licensed under the MIT license.
+
+## Credits
+
+Created by João Gomes

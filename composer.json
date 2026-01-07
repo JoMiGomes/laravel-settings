@@ -1,0 +1,47 @@
+{
+    "name": "jomigomes/laravel-settings",
+    "description": "A flexible Laravel package for managing scoped, typed settings with a manifesto-based configuration approach",
+    "type": "library",
+    "license": "MIT",
+    "keywords": [
+        "laravel",
+        "settings",
+        "configuration",
+        "scoped-settings",
+        "typed-settings"
+    ],
+    "authors": [
+        {
+            "name": "João Gomes",
+            "email": "your-email@example.com"
+        }
+    ],
+    "require": {
+        "php": "^8.1|^8.2|^8.3",
+        "illuminate/database": "^10.0|^11.0",
+        "illuminate/support": "^10.0|^11.0"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^8.0|^9.0",
+        "phpunit/phpunit": "^10.0|^11.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "YellowParadox\\LaravelSettings\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "YellowParadox\\LaravelSettings\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "YellowParadox\\LaravelSettings\\SettingsServiceProvider"
+            ]
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
