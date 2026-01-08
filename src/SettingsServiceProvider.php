@@ -42,5 +42,20 @@ class SettingsServiceProvider extends ServiceProvider
         $this->app->singleton(SettingValidatorInterface::class, SettingValidator::class);
         $this->app->singleton(SettingsRepositoryInterface::class, SettingsRepository::class);
         $this->app->singleton(SettingsService::class);
+        
+        $this->app->alias(SettingsService::class, 'settings');
+    }
+    
+    /**
+     * Get the services provided by the provider.
+     */
+    public function provides(): array
+    {
+        return [
+            SettingValidatorInterface::class,
+            SettingsRepositoryInterface::class,
+            SettingsService::class,
+            'settings',
+        ];
     }
 }
