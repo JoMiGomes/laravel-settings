@@ -276,12 +276,18 @@ In this example:
 - The second parameter, `false`, represents the new value you want to set for the specified setting.  
 - The third parameter, `'app'`, specifies the scope in which the setting should be updated.  
 
-The method returns an instance of model Setting, so you can use it like so:  
+The method returns a `SettingData` DTO (Data Transfer Object), so you can access its properties like so:  
 
 ```php
 $setting->value // false
 
 $setting->type // 'boolean'
+
+$setting->setting // 'features.enable_notifications'
+
+$setting->scope // 'app'
+
+$setting->isDefault // false (true if using default value from config)
 ```
 
 <br>
@@ -367,12 +373,18 @@ In this example:
   
 *Note that there's no need to specify a scope as we are already using the user instance.*  
   
-Again the method returns an instance of model Setting, so you can use it like so:  
+The method returns a `SettingData` DTO, so you can access its properties like so:  
   
 ```php  
 $setting->value // 10  
   
 $setting->type // 'integer'  
+
+$setting->setting // 'personal.setting_1'
+
+$setting->scope // 'user:1' (scope string with model ID)
+
+$setting->isDefault // false
 ```  
   
   
@@ -437,7 +449,18 @@ $setting = Settings::get('personal.setting_1', $user);
 $setting = $user->getSetting('personal.setting_1');  
 ```  
   
-The method returns an instance of Setting model for non default settings or an instance of stdClass for defaults (this allows you to manipulate defaults in an object-like way)  
+The method returns a `SettingData` DTO with the following properties:
+
+```php
+$setting->value      // The setting value (properly cast to its type)
+$setting->type       // The setting type (e.g., 'integer', 'string', 'boolean')
+$setting->setting    // The setting key (e.g., 'personal.setting_1')
+$setting->scope      // The scope string (e.g., 'app' or 'user:1')
+$setting->isDefault  // Boolean indicating if using default value from config
+$setting->id         // Database ID (null for default settings)
+```
+
+Returns `null` if the setting doesn't exist in the manifesto and database  
   
 <br>
 
@@ -462,7 +485,7 @@ $settingsCollection = Setting::getAllScoped($user);
 $settingsCollection = $user->getAllSettings();
 ```
 
-The method returns a collection of all the settings for that specific scope.  
+The method returns a `Collection` of `SettingData` DTOs for all settings in that scope. Each item in the collection has the same properties as shown above (`value`, `type`, `setting`, `scope`, `isDefault`, `id`).  
 
 <br>
 
@@ -509,7 +532,7 @@ $settingsCollection = Setting::getFiltered($user, 'personal');
 $user->getFilteredSettings('personal');  
 ```  
 
-The method returns a collection of all the settings under the `'personal'` level, so a total of 4 settings would be retrieved.  
+The method returns a `Collection` of `SettingData` DTOs for all settings under the `'personal'` level, so a total of 4 settings would be retrieved. Each item in the collection has the same properties (`value`, `type`, `setting`, `scope`, `isDefault`, `id`).
 
 <br>
 
@@ -528,7 +551,7 @@ $settingsCollection = Setting::getFiltered($user, 'personal.nested_group');
 $user->getFilteredSettings('personal.nested_group');
 ```
 
-The method returns a collection of all the settings under `'nested_group'` level, so a total of 2 settings would be retrieved.
+The method returns a `Collection` of `SettingData` DTOs for all settings under `'nested_group'` level, so a total of 2 settings would be retrieved.
 
 So as you can see, we make use of dot-notation to filter the levels, just like we do when retrieving a single setting.
 
