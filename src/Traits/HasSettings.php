@@ -2,11 +2,11 @@
 
 namespace YellowParadox\LaravelSettings\Traits;
 
+use YellowParadox\LaravelSettings\DataTransferObjects\SettingData;
 use YellowParadox\LaravelSettings\Models\Setting;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
-use stdClass;
 
 /**
  * Trait HasSettings
@@ -39,7 +39,7 @@ trait HasSettings
     /**
      * Gets a single setting, scoped to the current model.
      */
-    public function getSetting(string $setting): stdClass|Setting|null
+    public function getSetting(string $setting): ?SettingData
     {
         return Setting::get($setting, $this);
     }
@@ -47,7 +47,7 @@ trait HasSettings
     /**
      * Sets a single setting, scoped to the current model.
      */
-    public function setSetting(string $setting, mixed $newValue): stdClass|Setting
+    public function setSetting(string $setting, mixed $newValue): SettingData
     {
         return Setting::set($setting, $newValue, $this);
     }

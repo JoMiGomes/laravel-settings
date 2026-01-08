@@ -2,6 +2,11 @@
 
 namespace YellowParadox\LaravelSettings;
 
+use YellowParadox\LaravelSettings\Contracts\SettingValidatorInterface;
+use YellowParadox\LaravelSettings\Contracts\SettingsRepositoryInterface;
+use YellowParadox\LaravelSettings\Repositories\SettingsRepository;
+use YellowParadox\LaravelSettings\Services\SettingsService;
+use YellowParadox\LaravelSettings\Validators\SettingValidator;
 use Illuminate\Support\ServiceProvider;
 
 class SettingsServiceProvider extends ServiceProvider
@@ -16,10 +21,12 @@ class SettingsServiceProvider extends ServiceProvider
         ], 'settings-config');
 
         $this->publishes([
-            __DIR__.'/../database/migrations/create_settings_table.php.stub' => database_path('migrations/'.date('Y_m_d_His', time()).'_create_settings_table.php'),
+            __DIR__.'/../database/migrations/2024_01_01_000000_create_settings_table.php' => database_path('migrations/'.date('Y_m_d_His', time()).'_create_settings_table.php'),
         ], 'settings-migrations');
 
-        $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
+        if ($this->app->runningInConsole()) {
+            $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
+        }
     }
 
     /**
@@ -31,5 +38,9 @@ class SettingsServiceProvider extends ServiceProvider
             __DIR__.'/../config/settings.php',
             'settings'
         );
+
+        $this->app->singleton(SettingValidatorInterface::class, SettingValidator::class);
+        $this->app->singleton(SettingsRepositoryInterface::class, SettingsRepository::class);
+        $this->app->singleton(SettingsService::class);
     }
 }
