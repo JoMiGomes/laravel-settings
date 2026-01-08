@@ -5,6 +5,21 @@ use YellowParadox\LaravelSettings\Models\Setting;
 return [
     /*
     |--------------------------------------------------------------------------
+    | Settings Cache
+    |--------------------------------------------------------------------------
+    |
+    | Enable caching for settings to improve performance. When enabled, settings
+    | will be cached for the specified TTL (in seconds). Cache is automatically
+    | invalidated when settings are updated.
+    |
+    */
+    'cache' => [
+        'enabled' => env('SETTINGS_CACHE_ENABLED', false),
+        'ttl' => env('SETTINGS_CACHE_TTL', 3600), // 1 hour
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
     | Settings
     |--------------------------------------------------------------------------
     |

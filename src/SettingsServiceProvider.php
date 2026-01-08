@@ -46,7 +46,13 @@ class SettingsServiceProvider extends ServiceProvider
 
         $this->app->singleton(SettingValidatorInterface::class, SettingValidator::class);
         $this->app->singleton(SettingsRepositoryInterface::class, SettingsRepository::class);
-        $this->app->singleton(SettingsService::class);
+        
+        // Register cached or non-cached service based on configuration
+        if (config('settings.cache.enabled', false)) {
+            $this->app->singleton(SettingsService::class, \YellowParadox\LaravelSettings\Services\CachedSettingsService::class);
+        } else {
+            $this->app->singleton(SettingsService::class);
+        }
         
         $this->app->alias(SettingsService::class, 'settings');
     }
