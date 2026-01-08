@@ -16,7 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 - Upcoming fixes
 
-## [2.1.0] - TBD
+## [2.1.0] - 2025-01-08
 
 ### Added
 - **Events System**: Fire events on setting lifecycle operations
@@ -42,7 +42,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Service provider now conditionally registers cached service implementation
 - Configuration file includes new cache settings section
 
-## [2.0.0] - TBD
+## [2.0.0] - 2025-01-08
 
 ### Breaking
 - `Setting::get`, `Setting::set`, `Setting::getAllScoped`, `Setting::getFiltered`, and the `HasSettings` trait helpers now return `SettingData` DTOs instead of `stdClass`/`Setting` models.
@@ -65,6 +65,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Removed insecure `unserialize` usage when casting objects.
 - Ensured default and persisted settings share the same API surface via DTOs.
 
-## [1.0.0] - TBD
+## [1.0.0] - 2025-01-08
 
-Initial release
+Initial release (superseded by 2.0.0 refactor)
