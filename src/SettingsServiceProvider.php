@@ -26,6 +26,11 @@ class SettingsServiceProvider extends ServiceProvider
 
         if ($this->app->runningInConsole()) {
             $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
+            
+            $this->commands([
+                \YellowParadox\LaravelSettings\Console\SettingsListCommand::class,
+                \YellowParadox\LaravelSettings\Console\SettingsClearCommand::class,
+            ]);
         }
     }
 
