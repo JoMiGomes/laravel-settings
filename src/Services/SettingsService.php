@@ -1,16 +1,16 @@
 <?php
 
-namespace YellowParadox\LaravelSettings\Services;
+namespace JomiGomes\LaravelSettings\Services;
 
-use YellowParadox\LaravelSettings\Contracts\SettingValidatorInterface;
-use YellowParadox\LaravelSettings\Contracts\SettingsRepositoryInterface;
-use YellowParadox\LaravelSettings\DataTransferObjects\SettingData;
-use YellowParadox\LaravelSettings\Events\SettingCreated;
-use YellowParadox\LaravelSettings\Events\SettingDeleted;
-use YellowParadox\LaravelSettings\Events\SettingRetrieved;
-use YellowParadox\LaravelSettings\Events\SettingUpdated;
-use YellowParadox\LaravelSettings\Models\Setting;
-use YellowParadox\LaravelSettings\Traits\HasSettings;
+use JomiGomes\LaravelSettings\Contracts\SettingValidatorInterface;
+use JomiGomes\LaravelSettings\Contracts\SettingsRepositoryInterface;
+use JomiGomes\LaravelSettings\DataTransferObjects\SettingData;
+use JomiGomes\LaravelSettings\Events\SettingCreated;
+use JomiGomes\LaravelSettings\Events\SettingDeleted;
+use JomiGomes\LaravelSettings\Events\SettingRetrieved;
+use JomiGomes\LaravelSettings\Events\SettingUpdated;
+use JomiGomes\LaravelSettings\Models\Setting;
+use JomiGomes\LaravelSettings\Traits\HasSettings;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;

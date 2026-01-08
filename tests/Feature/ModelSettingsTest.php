@@ -1,15 +1,15 @@
 <?php
 
-namespace YellowParadox\LaravelSettings\Tests\Feature;
+namespace JomiGomes\LaravelSettings\Tests\Feature;
 
-use YellowParadox\LaravelSettings\Models\Setting;
-use YellowParadox\LaravelSettings\Tests\Fixtures\User;
+use JomiGomes\LaravelSettings\Models\Setting;
+use JomiGomes\LaravelSettings\Tests\Fixtures\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
 use InvalidArgumentException;
 use Orchestra\Testbench\TestCase;
-use YellowParadox\LaravelSettings\SettingsServiceProvider;
+use JomiGomes\LaravelSettings\SettingsServiceProvider;
 
 class ModelSettingsTest extends TestCase
 {
@@ -104,7 +104,7 @@ class ModelSettingsTest extends TestCase
 
         $setting = Setting::set('preferences.theme', 'dark', $user);
 
-        $this->assertInstanceOf(\YellowParadox\LaravelSettings\DataTransferObjects\SettingData::class, $setting);
+        $this->assertInstanceOf(\JomiGomes\LaravelSettings\DataTransferObjects\SettingData::class, $setting);
         $this->assertEquals('dark', $setting->value);
         $this->assertFalse($setting->isDefault);
         
@@ -122,7 +122,7 @@ class ModelSettingsTest extends TestCase
 
         $setting = $user->setSetting('preferences.theme', 'dark');
 
-        $this->assertInstanceOf(\YellowParadox\LaravelSettings\DataTransferObjects\SettingData::class, $setting);
+        $this->assertInstanceOf(\JomiGomes\LaravelSettings\DataTransferObjects\SettingData::class, $setting);
         $this->assertEquals('dark', $setting->value);
     }
 
@@ -200,7 +200,7 @@ class ModelSettingsTest extends TestCase
         $this->assertCount(4, $settings);
         
         $themeSetting = $settings->firstWhere('setting', 'preferences.theme');
-        $this->assertInstanceOf(\YellowParadox\LaravelSettings\DataTransferObjects\SettingData::class, $themeSetting);
+        $this->assertInstanceOf(\JomiGomes\LaravelSettings\DataTransferObjects\SettingData::class, $themeSetting);
         $this->assertFalse($themeSetting->isDefault);
         $this->assertEquals('dark', $themeSetting->value);
         

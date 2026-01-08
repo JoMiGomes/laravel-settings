@@ -1,8 +1,8 @@
 <?php
 
-namespace YellowParadox\LaravelSettings\Console;
+namespace JomiGomes\LaravelSettings\Console;
 
-use YellowParadox\LaravelSettings\Models\Setting;
+use JomiGomes\LaravelSettings\Models\Setting;
 use Illuminate\Console\Command;
 
 class SettingsListCommand extends Command

@@ -28,21 +28,21 @@
     },
     "autoload": {
         "psr-4": {
-            "YellowParadox\\LaravelSettings\\": "src/"
+            "JomiGomes\\LaravelSettings\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "YellowParadox\\LaravelSettings\\Tests\\": "tests/"
+            "JomiGomes\\LaravelSettings\\Tests\\": "tests/"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "YellowParadox\\LaravelSettings\\SettingsServiceProvider"
+                "JomiGomes\\LaravelSettings\\SettingsServiceProvider"
             ],
             "aliases": {
-                "Settings": "YellowParadox\\LaravelSettings\\Facades\\Settings"
+                "Settings": "JomiGomes\\LaravelSettings\\Facades\\Settings"
             }
         }
     },

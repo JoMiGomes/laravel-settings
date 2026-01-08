@@ -1,8 +1,8 @@
 <?php
 
-namespace YellowParadox\LaravelSettings\Casts;
+namespace JomiGomes\LaravelSettings\Casts;
 
-use YellowParadox\LaravelSettings\Models\Setting;
+use JomiGomes\LaravelSettings\Models\Setting;
 use Illuminate\Contracts\Database\Eloquent\CastsAttributes;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;

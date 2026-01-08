@@ -1,11 +1,11 @@
 <?php
 
-namespace YellowParadox\LaravelSettings\Contracts;
+namespace JomiGomes\LaravelSettings\Contracts;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
-use YellowParadox\LaravelSettings\DataTransferObjects\SettingData;
-use YellowParadox\LaravelSettings\Models\Setting;
+use JomiGomes\LaravelSettings\DataTransferObjects\SettingData;
+use JomiGomes\LaravelSettings\Models\Setting;
 
 interface SettingsRepositoryInterface
 {

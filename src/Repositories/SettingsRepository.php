@@ -1,9 +1,9 @@
 <?php
 
-namespace YellowParadox\LaravelSettings\Repositories;
+namespace JomiGomes\LaravelSettings\Repositories;
 
-use YellowParadox\LaravelSettings\Contracts\SettingsRepositoryInterface;
-use YellowParadox\LaravelSettings\Models\Setting;
+use JomiGomes\LaravelSettings\Contracts\SettingsRepositoryInterface;
+use JomiGomes\LaravelSettings\Models\Setting;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;

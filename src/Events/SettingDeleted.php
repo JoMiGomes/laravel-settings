@@ -1,6 +1,6 @@
 <?php
 
-namespace YellowParadox\LaravelSettings\Events;
+namespace JomiGomes\LaravelSettings\Events;
 
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;

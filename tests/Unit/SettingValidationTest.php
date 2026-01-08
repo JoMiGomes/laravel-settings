@@ -1,14 +1,14 @@
 <?php
 
-namespace YellowParadox\LaravelSettings\Tests\Unit;
+namespace JomiGomes\LaravelSettings\Tests\Unit;
 
-use YellowParadox\LaravelSettings\Models\Setting;
+use JomiGomes\LaravelSettings\Models\Setting;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
 use InvalidArgumentException;
 use Orchestra\Testbench\TestCase;
-use YellowParadox\LaravelSettings\SettingsServiceProvider;
+use JomiGomes\LaravelSettings\SettingsServiceProvider;
 
 class SettingValidationTest extends TestCase
 {

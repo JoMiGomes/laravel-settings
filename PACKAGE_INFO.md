@@ -40,10 +40,10 @@ Prepare for package/
 
 All classes have been migrated from the application namespace to the package namespace:
 
-- `App\Casts\DynamicTypeCasting` → `YellowParadox\LaravelSettings\Casts\DynamicTypeCasting`
-- `App\Models\Settings\BaseSetting` → `YellowParadox\LaravelSettings\Models\BaseSetting`
-- `App\Models\Settings\Setting` → `YellowParadox\LaravelSettings\Models\Setting`
-- `App\Models\Traits\HasSettings` → `YellowParadox\LaravelSettings\Traits\HasSettings`
+- `App\Casts\DynamicTypeCasting` → `JomiGomes\LaravelSettings\Casts\DynamicTypeCasting`
+- `App\Models\Settings\BaseSetting` → `JomiGomes\LaravelSettings\Models\BaseSetting`
+- `App\Models\Settings\Setting` → `JomiGomes\LaravelSettings\Models\Setting`
+- `App\Models\Traits\HasSettings` → `JomiGomes\LaravelSettings\Traits\HasSettings`
 
 ## Next Steps to Publish
 

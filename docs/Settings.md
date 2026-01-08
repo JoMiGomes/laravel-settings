@@ -90,7 +90,7 @@ It's here that you articulate the blueprint for every setting, defining their de
 By default, the manifesto file is named `settings.php`. However, you have the flexibility to customize this filename according to your preferences. This customization is achieved by modifying a constant value in the `Settings` class.  
   
 ```php  
-// YellowParadox\LaravelSettings\Models\Setting
+// Namespace: JomiGomes\LaravelSettings\Models\Setting
   
 class Setting  
 {  
@@ -265,7 +265,7 @@ use App\Models\Settings\Setting;
 
 
 ```php
-use YellowParadox\LaravelSettings\Models\Setting;
+use JomiGomes\LaravelSettings\Models\Setting;
 
 $setting = Setting::set('features.enable_notifications', false, 'app');  
 ```  
@@ -298,7 +298,7 @@ Before using model-related scopes, ensure that the model implements the `HasSett
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use YellowParadox\LaravelSettings\Traits\HasSettings;
+use JomiGomes\LaravelSettings\Traits\HasSettings;
 
 class User extends Model
 {
@@ -334,7 +334,7 @@ use App\Models\Settings\Setting;
 Now you can use it like:  
   
 ```php  
-use YellowParadox\LaravelSettings\Models\Setting;  
+use JomiGomes\LaravelSettings\Models\Setting;  
 use App\Models\User;  
   
 $user = User::find(1);  
@@ -352,7 +352,7 @@ In this example:
 or you can do it like:  
   
 ```php  
-use YellowParadox\LaravelSettings\Models\Setting;  
+use JomiGomes\LaravelSettings\Models\Setting;  
 use App\Models\User;  
   
 $user = User::find(1);  
@@ -421,7 +421,7 @@ use App\Models\Settings\Setting;
 To retrieve a single setting, you can use the Settings::get method:  
   
 ```php  
-use YellowParadox\LaravelSettings\Models\Setting;  
+use JomiGomes\LaravelSettings\Models\Setting;  
 use App\Models\User;  
   
 // Non-model related scope  
@@ -446,7 +446,7 @@ The method returns an instance of Setting model for non default settings or an i
 To retrieve all settings within a specific scope, you can use the Settings::getAllScoped method.  
   
 ```php  
-use YellowParadox\LaravelSettings\Models\Setting;  
+use JomiGomes\LaravelSettings\Models\Setting;  
 use App\Models\User;  
   
 // Non-model related scope  
@@ -497,7 +497,7 @@ Consider the following manifesto example, where we place under the scope `'user'
 We could retrieve all the settings under the group `'personal'` like so:  
   
 ```php  
-use YellowParadox\LaravelSettings\Models\Setting;  
+use JomiGomes\LaravelSettings\Models\Setting;  
 use App\Models\User;  
   
 $user = User::find(1);  
@@ -516,7 +516,7 @@ The method returns a collection of all the settings under the `'personal'` level
 And we could then retrieve all settings under the group `'nested_group'` like so:
 
 ```php
-use YellowParadox\LaravelSettings\Models\Setting;
+use JomiGomes\LaravelSettings\Models\Setting;
 use App\Models\User;
 
 $user = User::find(1);
@@ -542,10 +542,10 @@ The package fires events during setting lifecycle operations, allowing you to li
 
 ```php
 // In your EventServiceProvider
-use YellowParadox\LaravelSettings\Events\SettingUpdated;
-use YellowParadox\LaravelSettings\Events\SettingCreated;
-use YellowParadox\LaravelSettings\Events\SettingDeleted;
-use YellowParadox\LaravelSettings\Events\SettingRetrieved;
+use JomiGomes\LaravelSettings\Events\SettingUpdated;
+use JomiGomes\LaravelSettings\Events\SettingCreated;
+use JomiGomes\LaravelSettings\Events\SettingDeleted;
+use JomiGomes\LaravelSettings\Events\SettingRetrieved;
 
 protected $listen = [
     SettingUpdated::class => [
@@ -579,7 +579,7 @@ All events include the previous value for auditing and rollback purposes.
 For cleaner syntax, use the `Settings` facade instead of the `Setting` model:
 
 ```php
-use YellowParadox\LaravelSettings\Facades\Settings;
+use JomiGomes\LaravelSettings\Facades\Settings;
 
 // Instead of Setting::get()
 $value = Settings::get('preferences.theme', 'user');

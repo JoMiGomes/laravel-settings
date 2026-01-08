@@ -31,8 +31,7 @@ return [
     |
     | Every setting that we register here must have type and value. Type is
     | important as it will trigger automatic casts on the setting model level.
-    | Please use YellowParadox\LaravelSettings\Models\Setting constants to define types, for
-    | consistency.
+    | Please use Setting::TYPE_* constants to define types for consistency.
     */
 
     /*

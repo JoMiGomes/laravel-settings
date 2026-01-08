@@ -1,8 +1,8 @@
 <?php
 
-namespace YellowParadox\LaravelSettings\DataTransferObjects;
+namespace JomiGomes\LaravelSettings\DataTransferObjects;
 
-use YellowParadox\LaravelSettings\Models\Setting;
+use JomiGomes\LaravelSettings\Models\Setting;
 
 class SettingData
 {

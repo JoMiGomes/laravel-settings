@@ -1,15 +1,15 @@
 <?php
 
-namespace YellowParadox\LaravelSettings\Tests;
+namespace JomiGomes\LaravelSettings\Tests;
 
-use YellowParadox\LaravelSettings\Models\Setting;
+use JomiGomes\LaravelSettings\Models\Setting;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
 use InvalidArgumentException;
 use stdClass;
 use Orchestra\Testbench\TestCase;
-use YellowParadox\LaravelSettings\SettingsServiceProvider;
+use JomiGomes\LaravelSettings\SettingsServiceProvider;
 
 class SettingTest extends TestCase
 {
@@ -109,13 +109,13 @@ class SettingTest extends TestCase
     {
         $settingBeforeChange = Setting::get('integer_setting', 'test_scope');
 
-        $this->assertInstanceOf(\YellowParadox\LaravelSettings\DataTransferObjects\SettingData::class, $settingBeforeChange);
+        $this->assertInstanceOf(\JomiGomes\LaravelSettings\DataTransferObjects\SettingData::class, $settingBeforeChange);
         $this->assertTrue($settingBeforeChange->isDefault);
 
         $newValue = $this->getDifferentValue($settingBeforeChange->value);
         $newSetting = Setting::set('integer_setting', $newValue, 'test_scope');
 
-        $this->assertInstanceOf(\YellowParadox\LaravelSettings\DataTransferObjects\SettingData::class, $newSetting);
+        $this->assertInstanceOf(\JomiGomes\LaravelSettings\DataTransferObjects\SettingData::class, $newSetting);
         $this->assertFalse($newSetting->isDefault);
 
         $settingAfterChange = Setting::get('integer_setting', 'test_scope');
@@ -136,12 +136,12 @@ class SettingTest extends TestCase
     {
         $settingBeforeChange = Setting::get('double_setting', 'test_scope');
 
-        $this->assertInstanceOf(\YellowParadox\LaravelSettings\DataTransferObjects\SettingData::class, $settingBeforeChange);
+        $this->assertInstanceOf(\JomiGomes\LaravelSettings\DataTransferObjects\SettingData::class, $settingBeforeChange);
 
         $newValue = $this->getDifferentValue($settingBeforeChange->value);
         $newSetting = Setting::set('double_setting', $newValue, 'test_scope');
 
-        $this->assertInstanceOf(\YellowParadox\LaravelSettings\DataTransferObjects\SettingData::class, $newSetting);
+        $this->assertInstanceOf(\JomiGomes\LaravelSettings\DataTransferObjects\SettingData::class, $newSetting);
 
         $settingAfterChange = Setting::get('double_setting', 'test_scope');
 
@@ -161,12 +161,12 @@ class SettingTest extends TestCase
     {
         $settingBeforeChange = Setting::get('boolean_setting', 'test_scope');
 
-        $this->assertInstanceOf(\YellowParadox\LaravelSettings\DataTransferObjects\SettingData::class, $settingBeforeChange);
+        $this->assertInstanceOf(\JomiGomes\LaravelSettings\DataTransferObjects\SettingData::class, $settingBeforeChange);
 
         $newValue = $this->getDifferentValue($settingBeforeChange->value);
         $newSetting = Setting::set('boolean_setting', $newValue, 'test_scope');
 
-        $this->assertInstanceOf(\YellowParadox\LaravelSettings\DataTransferObjects\SettingData::class, $newSetting);
+        $this->assertInstanceOf(\JomiGomes\LaravelSettings\DataTransferObjects\SettingData::class, $newSetting);
 
         $settingAfterChange = Setting::get('boolean_setting', 'test_scope');
 
@@ -186,12 +186,12 @@ class SettingTest extends TestCase
     {
         $settingBeforeChange = Setting::get('string_setting', 'test_scope');
 
-        $this->assertInstanceOf(\YellowParadox\LaravelSettings\DataTransferObjects\SettingData::class, $settingBeforeChange);
+        $this->assertInstanceOf(\JomiGomes\LaravelSettings\DataTransferObjects\SettingData::class, $settingBeforeChange);
 
         $newValue = $this->getDifferentValue($settingBeforeChange->value);
         $newSetting = Setting::set('string_setting', $newValue, 'test_scope');
 
-        $this->assertInstanceOf(\YellowParadox\LaravelSettings\DataTransferObjects\SettingData::class, $newSetting);
+        $this->assertInstanceOf(\JomiGomes\LaravelSettings\DataTransferObjects\SettingData::class, $newSetting);
 
         $settingAfterChange = Setting::get('string_setting', 'test_scope');
 
@@ -211,12 +211,12 @@ class SettingTest extends TestCase
     {
         $settingBeforeChange = Setting::get('array_setting', 'test_scope');
 
-        $this->assertInstanceOf(\YellowParadox\LaravelSettings\DataTransferObjects\SettingData::class, $settingBeforeChange);
+        $this->assertInstanceOf(\JomiGomes\LaravelSettings\DataTransferObjects\SettingData::class, $settingBeforeChange);
 
         $newValue = $this->getDifferentValue($settingBeforeChange->value);
         $newSetting = Setting::set('array_setting', $newValue, 'test_scope');
 
-        $this->assertInstanceOf(\YellowParadox\LaravelSettings\DataTransferObjects\SettingData::class, $newSetting);
+        $this->assertInstanceOf(\JomiGomes\LaravelSettings\DataTransferObjects\SettingData::class, $newSetting);
 
         $settingAfterChange = Setting::get('array_setting', 'test_scope');
 
@@ -236,12 +236,12 @@ class SettingTest extends TestCase
     {
         $settingBeforeChange = Setting::get('collection_setting', 'test_scope');
 
-        $this->assertInstanceOf(\YellowParadox\LaravelSettings\DataTransferObjects\SettingData::class, $settingBeforeChange);
+        $this->assertInstanceOf(\JomiGomes\LaravelSettings\DataTransferObjects\SettingData::class, $settingBeforeChange);
 
         $newValue = $this->getDifferentValue($settingBeforeChange->value);
         $newSetting = Setting::set('collection_setting', $newValue, 'test_scope');
 
-        $this->assertInstanceOf(\YellowParadox\LaravelSettings\DataTransferObjects\SettingData::class, $newSetting);
+        $this->assertInstanceOf(\JomiGomes\LaravelSettings\DataTransferObjects\SettingData::class, $newSetting);
 
         $settingAfterChange = Setting::get('collection_setting', 'test_scope');
 
@@ -261,12 +261,12 @@ class SettingTest extends TestCase
     {
         $settingBeforeChange = Setting::get('object_setting', 'test_scope');
 
-        $this->assertInstanceOf(\YellowParadox\LaravelSettings\DataTransferObjects\SettingData::class, $settingBeforeChange);
+        $this->assertInstanceOf(\JomiGomes\LaravelSettings\DataTransferObjects\SettingData::class, $settingBeforeChange);
 
         $newValue = $this->getDifferentValue($settingBeforeChange->value);
         $newSetting = Setting::set('object_setting', $newValue, 'test_scope');
 
-        $this->assertInstanceOf(\YellowParadox\LaravelSettings\DataTransferObjects\SettingData::class, $newSetting);
+        $this->assertInstanceOf(\JomiGomes\LaravelSettings\DataTransferObjects\SettingData::class, $newSetting);
 
         $settingAfterChange = Setting::get('object_setting', 'test_scope');
 
@@ -286,12 +286,12 @@ class SettingTest extends TestCase
     {
         $settingBeforeChange = Setting::get('datetime_setting', 'test_scope');
 
-        $this->assertInstanceOf(\YellowParadox\LaravelSettings\DataTransferObjects\SettingData::class, $settingBeforeChange);
+        $this->assertInstanceOf(\JomiGomes\LaravelSettings\DataTransferObjects\SettingData::class, $settingBeforeChange);
 
         $newValue = $this->getDifferentValue($settingBeforeChange->value);
         $newSetting = Setting::set('datetime_setting', $newValue, 'test_scope');
 
-        $this->assertInstanceOf(\YellowParadox\LaravelSettings\DataTransferObjects\SettingData::class, $newSetting);
+        $this->assertInstanceOf(\JomiGomes\LaravelSettings\DataTransferObjects\SettingData::class, $newSetting);
 
         $settingAfterChange = Setting::get('datetime_setting', 'test_scope');
 
@@ -386,7 +386,7 @@ class SettingTest extends TestCase
         $filteredSettings = Setting::getFiltered($scope, $filter);
 
         $this->assertEquals(2, $filteredSettings->count());
-        $this->assertTrue($filteredSettings->every(fn ($setting) => $setting instanceof \YellowParadox\LaravelSettings\DataTransferObjects\SettingData));
+        $this->assertTrue($filteredSettings->every(fn ($setting) => $setting instanceof \JomiGomes\LaravelSettings\DataTransferObjects\SettingData));
 
         Setting::set('feature_1.general.general_1', 10, $scope);
         Setting::set('feature_1.general.general_2', 20, $scope);
@@ -394,6 +394,6 @@ class SettingTest extends TestCase
         $filteredSettingsWithNonDefaults = Setting::getFiltered($scope, $filter);
 
         $this->assertEquals(2, $filteredSettingsWithNonDefaults->count());
-        $this->assertTrue($filteredSettingsWithNonDefaults->every(fn ($setting) => $setting instanceof \YellowParadox\LaravelSettings\DataTransferObjects\SettingData));
+        $this->assertTrue($filteredSettingsWithNonDefaults->every(fn ($setting) => $setting instanceof \JomiGomes\LaravelSettings\DataTransferObjects\SettingData));
     }
 }

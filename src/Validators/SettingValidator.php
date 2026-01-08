@@ -1,9 +1,9 @@
 <?php
 
-namespace YellowParadox\LaravelSettings\Validators;
+namespace JomiGomes\LaravelSettings\Validators;
 
-use YellowParadox\LaravelSettings\Contracts\SettingValidatorInterface;
-use YellowParadox\LaravelSettings\Models\Setting;
+use JomiGomes\LaravelSettings\Contracts\SettingValidatorInterface;
+use JomiGomes\LaravelSettings\Models\Setting;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
 use InvalidArgumentException;

@@ -1,12 +1,12 @@
 <?php
 
-namespace YellowParadox\LaravelSettings;
+namespace JomiGomes\LaravelSettings;
 
-use YellowParadox\LaravelSettings\Contracts\SettingValidatorInterface;
-use YellowParadox\LaravelSettings\Contracts\SettingsRepositoryInterface;
-use YellowParadox\LaravelSettings\Repositories\SettingsRepository;
-use YellowParadox\LaravelSettings\Services\SettingsService;
-use YellowParadox\LaravelSettings\Validators\SettingValidator;
+use JomiGomes\LaravelSettings\Contracts\SettingValidatorInterface;
+use JomiGomes\LaravelSettings\Contracts\SettingsRepositoryInterface;
+use JomiGomes\LaravelSettings\Repositories\SettingsRepository;
+use JomiGomes\LaravelSettings\Services\SettingsService;
+use JomiGomes\LaravelSettings\Validators\SettingValidator;
 use Illuminate\Support\ServiceProvider;
 
 class SettingsServiceProvider extends ServiceProvider
@@ -28,8 +28,8 @@ class SettingsServiceProvider extends ServiceProvider
             $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
             
             $this->commands([
-                \YellowParadox\LaravelSettings\Console\SettingsListCommand::class,
-                \YellowParadox\LaravelSettings\Console\SettingsClearCommand::class,
+                \JomiGomes\LaravelSettings\Console\SettingsListCommand::class,
+                \JomiGomes\LaravelSettings\Console\SettingsClearCommand::class,
             ]);
         }
     }
@@ -49,7 +49,7 @@ class SettingsServiceProvider extends ServiceProvider
         
         // Register cached or non-cached service based on configuration
         if (config('settings.cache.enabled', false)) {
-            $this->app->singleton(SettingsService::class, \YellowParadox\LaravelSettings\Services\CachedSettingsService::class);
+            $this->app->singleton(SettingsService::class, \JomiGomes\LaravelSettings\Services\CachedSettingsService::class);
         } else {
             $this->app->singleton(SettingsService::class);
         }

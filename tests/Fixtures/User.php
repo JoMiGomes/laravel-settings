@@ -1,9 +1,9 @@
 <?php
 
-namespace YellowParadox\LaravelSettings\Tests\Fixtures;
+namespace JomiGomes\LaravelSettings\Tests\Fixtures;
 
 use Illuminate\Database\Eloquent\Model;
-use YellowParadox\LaravelSettings\Traits\HasSettings;
+use JomiGomes\LaravelSettings\Traits\HasSettings;
 
 class User extends Model
 {

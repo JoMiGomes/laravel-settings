@@ -1,14 +1,14 @@
 <?php
 
-namespace YellowParadox\LaravelSettings\Tests\Feature;
+namespace JomiGomes\LaravelSettings\Tests\Feature;
 
-use YellowParadox\LaravelSettings\Models\Setting;
+use JomiGomes\LaravelSettings\Models\Setting;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
 use InvalidArgumentException;
 use Orchestra\Testbench\TestCase;
-use YellowParadox\LaravelSettings\SettingsServiceProvider;
+use JomiGomes\LaravelSettings\SettingsServiceProvider;
 
 class NonModelSettingsTest extends TestCase
 {
@@ -86,7 +86,7 @@ class NonModelSettingsTest extends TestCase
     {
         $setting = Setting::set('features.enable_notifications', false, 'system');
 
-        $this->assertInstanceOf(\YellowParadox\LaravelSettings\DataTransferObjects\SettingData::class, $setting);
+        $this->assertInstanceOf(\JomiGomes\LaravelSettings\DataTransferObjects\SettingData::class, $setting);
         $this->assertEquals(false, $setting->value);
         $this->assertEquals(Setting::TYPE_BOOLEAN, $setting->type);
         $this->assertFalse($setting->isDefault);
@@ -141,7 +141,7 @@ class NonModelSettingsTest extends TestCase
         $this->assertCount(3, $settings);
         
         $notificationSetting = $settings->firstWhere('setting', 'features.enable_notifications');
-        $this->assertInstanceOf(\YellowParadox\LaravelSettings\DataTransferObjects\SettingData::class, $notificationSetting);
+        $this->assertInstanceOf(\JomiGomes\LaravelSettings\DataTransferObjects\SettingData::class, $notificationSetting);
         $this->assertFalse($notificationSetting->isDefault);
         $this->assertEquals(false, $notificationSetting->value);
         
@@ -225,7 +225,7 @@ class NonModelSettingsTest extends TestCase
     {
         $setting = Setting::set('features.notification_threshold', 10, 'system');
 
-        $this->assertInstanceOf(\YellowParadox\LaravelSettings\DataTransferObjects\SettingData::class, $setting);
+        $this->assertInstanceOf(\JomiGomes\LaravelSettings\DataTransferObjects\SettingData::class, $setting);
         $this->assertEquals(10, $setting->value);
         $this->assertEquals(Setting::TYPE_INTEGER, $setting->type);
     }
@@ -235,7 +235,7 @@ class NonModelSettingsTest extends TestCase
     {
         $setting = Setting::set('appearance.theme_color', 'red', 'system');
 
-        $this->assertInstanceOf(\YellowParadox\LaravelSettings\DataTransferObjects\SettingData::class, $setting);
+        $this->assertInstanceOf(\JomiGomes\LaravelSettings\DataTransferObjects\SettingData::class, $setting);
         $this->assertEquals('red', $setting->value);
         $this->assertEquals(Setting::TYPE_STRING, $setting->type);
     }
@@ -250,7 +250,7 @@ class NonModelSettingsTest extends TestCase
 
         $setting = Setting::set('test_array', [4, 5, 6], 'system');
 
-        $this->assertInstanceOf(\YellowParadox\LaravelSettings\DataTransferObjects\SettingData::class, $setting);
+        $this->assertInstanceOf(\JomiGomes\LaravelSettings\DataTransferObjects\SettingData::class, $setting);
         $this->assertEquals([4, 5, 6], $setting->value);
         $this->assertEquals(Setting::TYPE_ARRAY, $setting->type);
     }
@@ -266,7 +266,7 @@ class NonModelSettingsTest extends TestCase
         $newCollection = collect(['b' => 2]);
         $setting = Setting::set('test_collection', $newCollection, 'system');
 
-        $this->assertInstanceOf(\YellowParadox\LaravelSettings\DataTransferObjects\SettingData::class, $setting);
+        $this->assertInstanceOf(\JomiGomes\LaravelSettings\DataTransferObjects\SettingData::class, $setting);
         $this->assertInstanceOf(Collection::class, $setting->value);
         $this->assertEquals(['b' => 2], $setting->value->toArray());
     }
@@ -282,7 +282,7 @@ class NonModelSettingsTest extends TestCase
         $newDate = Carbon::tomorrow();
         $setting = Setting::set('test_datetime', $newDate, 'system');
 
-        $this->assertInstanceOf(\YellowParadox\LaravelSettings\DataTransferObjects\SettingData::class, $setting);
+        $this->assertInstanceOf(\JomiGomes\LaravelSettings\DataTransferObjects\SettingData::class, $setting);
         $this->assertInstanceOf(Carbon::class, $setting->value);
         $this->assertTrue($newDate->isSameDay($setting->value));
     }
@@ -298,7 +298,7 @@ class NonModelSettingsTest extends TestCase
         $newObject = (object) ['new_key' => 'new_value'];
         $setting = Setting::set('test_object', $newObject, 'system');
 
-        $this->assertInstanceOf(\YellowParadox\LaravelSettings\DataTransferObjects\SettingData::class, $setting);
+        $this->assertInstanceOf(\JomiGomes\LaravelSettings\DataTransferObjects\SettingData::class, $setting);
         $this->assertIsObject($setting->value);
         $this->assertEquals('new_value', $setting->value->new_key);
     }
@@ -313,7 +313,7 @@ class NonModelSettingsTest extends TestCase
 
         $setting = Setting::set('test_double', 2.71, 'system');
 
-        $this->assertInstanceOf(\YellowParadox\LaravelSettings\DataTransferObjects\SettingData::class, $setting);
+        $this->assertInstanceOf(\JomiGomes\LaravelSettings\DataTransferObjects\SettingData::class, $setting);
         $this->assertEquals(2.71, $setting->value);
         $this->assertEquals(Setting::TYPE_DOUBLE, $setting->type);
     }

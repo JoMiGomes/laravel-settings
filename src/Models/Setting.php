@@ -1,10 +1,10 @@
 <?php
 
-namespace YellowParadox\LaravelSettings\Models;
+namespace JomiGomes\LaravelSettings\Models;
 
-use YellowParadox\LaravelSettings\Casts\SecureDynamicTypeCasting;
-use YellowParadox\LaravelSettings\DataTransferObjects\SettingData;
-use YellowParadox\LaravelSettings\Services\SettingsService;
+use JomiGomes\LaravelSettings\Casts\SecureDynamicTypeCasting;
+use JomiGomes\LaravelSettings\DataTransferObjects\SettingData;
+use JomiGomes\LaravelSettings\Services\SettingsService;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Support\Collection;

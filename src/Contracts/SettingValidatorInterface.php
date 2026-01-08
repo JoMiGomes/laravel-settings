@@ -1,6 +1,6 @@
 <?php
 
-namespace YellowParadox\LaravelSettings\Contracts;
+namespace JomiGomes\LaravelSettings\Contracts;
 
 interface SettingValidatorInterface
 {

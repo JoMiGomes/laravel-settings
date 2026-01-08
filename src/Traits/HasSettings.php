@@ -1,9 +1,9 @@
 <?php
 
-namespace YellowParadox\LaravelSettings\Traits;
+namespace JomiGomes\LaravelSettings\Traits;
 
-use YellowParadox\LaravelSettings\DataTransferObjects\SettingData;
-use YellowParadox\LaravelSettings\Models\Setting;
+use JomiGomes\LaravelSettings\DataTransferObjects\SettingData;
+use JomiGomes\LaravelSettings\Models\Setting;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;

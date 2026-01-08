@@ -52,7 +52,7 @@ php artisan migrate
 The package uses a "manifesto" file (`config/settings.php`) as the single source of truth for all settings. Define your settings structure here:
 
 ```php
-use YellowParadox\LaravelSettings\Models\Setting;
+use JomiGomes\LaravelSettings\Models\Setting;
 
 return [
     'system' => [
@@ -80,9 +80,9 @@ return [
 ### Non-Model Related Settings
 
 ```php
-use YellowParadox\LaravelSettings\Facades\Settings;
+use JomiGomes\LaravelSettings\Facades\Settings;
 // Or use the model directly:
-// use YellowParadox\LaravelSettings\Models\Setting;
+// use JomiGomes\LaravelSettings\Models\Setting;
 
 // Get a setting
 $setting = Settings::get('features.enable_notifications', 'system');
@@ -102,7 +102,7 @@ $features = Settings::getFiltered('system', 'features');
 First, add the `HasSettings` trait to your model:
 
 ```php
-use YellowParadox\LaravelSettings\Traits\HasSettings;
+use JomiGomes\LaravelSettings\Traits\HasSettings;
 
 class User extends Model
 {
@@ -133,7 +133,7 @@ $preferences = $user->getFilteredSettings('preferences');
 Listen to setting changes in your `EventServiceProvider`:
 
 ```php
-use YellowParadox\LaravelSettings\Events\SettingUpdated;
+use JomiGomes\LaravelSettings\Events\SettingUpdated;
 
 protected $listen = [
     SettingUpdated::class => [

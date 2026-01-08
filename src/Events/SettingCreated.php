@@ -1,8 +1,8 @@
 <?php
 
-namespace YellowParadox\LaravelSettings\Events;
+namespace JomiGomes\LaravelSettings\Events;
 
-use YellowParadox\LaravelSettings\DataTransferObjects\SettingData;
+use JomiGomes\LaravelSettings\DataTransferObjects\SettingData;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
