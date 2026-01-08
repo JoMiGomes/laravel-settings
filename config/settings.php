@@ -1,6 +1,6 @@
 <?php
 
-use YellowParadox\LaravelSettings\Models\Setting;
+use JomiGomes\LaravelSettings\Models\Setting;
 
 return [
     /*

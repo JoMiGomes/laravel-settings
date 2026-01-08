@@ -20,13 +20,9 @@ class SettingsServiceProvider extends ServiceProvider
             __DIR__.'/../config/settings.php' => config_path('settings.php'),
         ], 'settings-config');
 
-        $this->publishes([
-            __DIR__.'/../database/migrations/2024_01_01_000000_create_settings_table.php' => database_path('migrations/'.date('Y_m_d_His', time()).'_create_settings_table.php'),
-        ], 'settings-migrations');
-
         if ($this->app->runningInConsole()) {
             $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
-            
+
             $this->commands([
                 \JomiGomes\LaravelSettings\Console\SettingsListCommand::class,
                 \JomiGomes\LaravelSettings\Console\SettingsClearCommand::class,
