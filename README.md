@@ -10,6 +10,10 @@ A flexible Laravel package for managing scoped, typed settings with a manifesto-
 - **Default Values**: Settings are stored in config until changed, preventing database clutter
 - **Flexible Organization**: Support for nested groups and dot notation access
 - **Model Integration**: Easy integration with Eloquent models via the `HasSettings` trait
+- **Events System**: Listen to setting lifecycle events (retrieved, created, updated, deleted)
+- **Facade Support**: Clean API with `Settings` facade
+- **CLI Commands**: Manage settings via artisan commands
+- **Optional Caching**: Performance optimization with configurable cache layer
 
 ## Supported Types
 
@@ -76,16 +80,21 @@ return [
 ### Non-Model Related Settings
 
 ```php
-use YellowParadox\LaravelSettings\Models\Setting;
+use YellowParadox\LaravelSettings\Facades\Settings;
+// Or use the model directly:
+// use YellowParadox\LaravelSettings\Models\Setting;
 
 // Get a setting
-$setting = Setting::get('features.enable_notifications', 'system');
+$setting = Settings::get('features.enable_notifications', 'system');
 
 // Set a setting
-Setting::set('features.enable_notifications', false, 'system');
+Settings::set('features.enable_notifications', false, 'system');
 
 // Get all settings for a scope
-$allSettings = Setting::getAllScoped('system');
+$allSettings = Settings::getAllScoped('system');
+
+// Get filtered settings
+$features = Settings::getFiltered('system', 'features');
 ```
 
 ### Model Related Settings
@@ -117,6 +126,69 @@ $allSettings = $user->getAllSettings();
 
 // Get filtered settings
 $preferences = $user->getFilteredSettings('preferences');
+```
+
+### Events
+
+Listen to setting changes in your `EventServiceProvider`:
+
+```php
+use YellowParadox\LaravelSettings\Events\SettingUpdated;
+
+protected $listen = [
+    SettingUpdated::class => [
+        LogSettingChange::class,
+    ],
+];
+```
+
+Available events:
+- `SettingRetrieved` - Fired when a setting is accessed
+- `SettingCreated` - Fired when a new setting is stored
+- `SettingUpdated` - Fired when an existing setting changes
+- `SettingDeleted` - Fired when a setting reverts to default
+
+### Artisan Commands
+
+```bash
+# List all settings
+php artisan settings:list
+
+# List settings for a specific scope
+php artisan settings:list user
+
+# List with filter
+php artisan settings:list user --filter=preferences
+
+# Show only customized settings
+php artisan settings:list user --only-custom
+
+# Clear all customized settings
+php artisan settings:clear --force
+
+# Clear settings for a scope
+php artisan settings:clear user
+
+# Clear with filter
+php artisan settings:clear user --filter=preferences
+```
+
+### Caching
+
+Enable caching for improved performance in your `.env`:
+
+```env
+SETTINGS_CACHE_ENABLED=true
+SETTINGS_CACHE_TTL=3600
+```
+
+Or in `config/settings.php`:
+
+```php
+'cache' => [
+    'enabled' => true,
+    'ttl' => 3600, // seconds
+],
 ```
 
 ## Documentation

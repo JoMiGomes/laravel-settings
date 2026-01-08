@@ -18,7 +18,12 @@
    6.1 [Retrieve a Single Setting](#retrieve-a-single-setting)  
    6.2 [Retrieve All Settings Within a Scope](#retrieve-all-settings-within-a-scope)  
    6.3 [Retrieve Filtered Settings](#retrieve-filtered-settings)
-7. [Conclusion](#conclusion)
+7. [Advanced Features](#advanced-features)  
+   7.1 [Events System](#events-system)  
+   7.2 [Settings Facade](#settings-facade)  
+   7.3 [Artisan Commands](#artisan-commands)  
+   7.4 [Caching](#caching)
+8. [Conclusion](#conclusion)
 
 
 ## Introduction  
@@ -526,6 +531,148 @@ $user->getFilteredSettings('personal.nested_group');
 The method returns a collection of all the settings under `'nested_group'` level, so a total of 2 settings would be retrieved.
 
 So as you can see, we make use of dot-notation to filter the levels, just like we do when retrieving a single setting.
+
+<small>[Back to top](#table-of-contents)</small>
+
+## Advanced Features
+
+### Events System
+
+The package fires events during setting lifecycle operations, allowing you to listen and react to changes:
+
+```php
+// In your EventServiceProvider
+use YellowParadox\LaravelSettings\Events\SettingUpdated;
+use YellowParadox\LaravelSettings\Events\SettingCreated;
+use YellowParadox\LaravelSettings\Events\SettingDeleted;
+use YellowParadox\LaravelSettings\Events\SettingRetrieved;
+
+protected $listen = [
+    SettingUpdated::class => [
+        LogSettingChange::class,
+        NotifyAdministrators::class,
+    ],
+    SettingCreated::class => [
+        AuditNewSetting::class,
+    ],
+];
+```
+
+**Available Events:**
+
+- **SettingRetrieved**: Fired when a setting is accessed via `get()`
+  - Properties: `$setting` (SettingData)
+  
+- **SettingCreated**: Fired when a new setting is stored for the first time
+  - Properties: `$setting` (SettingData), `$previousValue` (mixed)
+  
+- **SettingUpdated**: Fired when an existing setting value changes
+  - Properties: `$setting` (SettingData), `$previousValue` (mixed)
+  
+- **SettingDeleted**: Fired when a setting reverts to its default value
+  - Properties: `$setting` (string), `$scope` (string), `$previousValue` (mixed)
+
+All events include the previous value for auditing and rollback purposes.
+
+### Settings Facade
+
+For cleaner syntax, use the `Settings` facade instead of the `Setting` model:
+
+```php
+use YellowParadox\LaravelSettings\Facades\Settings;
+
+// Instead of Setting::get()
+$value = Settings::get('preferences.theme', 'user');
+
+// Instead of Setting::set()
+Settings::set('preferences.theme', 'dark', 'user');
+
+// Works with all methods
+$all = Settings::getAllScoped('user');
+$filtered = Settings::getFiltered('user', 'preferences');
+```
+
+The facade provides the same functionality with a cleaner API and full IDE support.
+
+### Artisan Commands
+
+Manage settings via the command line:
+
+#### List Settings
+
+```bash
+# View all available scopes
+php artisan settings:list
+
+# List all settings for a scope
+php artisan settings:list user
+
+# Filter by group
+php artisan settings:list user --filter=preferences
+
+# Show only customized (non-default) settings
+php artisan settings:list user --only-custom
+```
+
+The command displays settings in a formatted table showing:
+- Setting name (dot notation path)
+- Type
+- Current value
+- Status (default or custom)
+
+#### Clear Settings
+
+```bash
+# Clear all customized settings (requires confirmation)
+php artisan settings:clear
+
+# Clear settings for a specific scope
+php artisan settings:clear user
+
+# Clear with filter
+php artisan settings:clear user --filter=preferences
+
+# Force without confirmation
+php artisan settings:clear user --force
+```
+
+Clearing settings reverts them to their default values defined in the manifesto.
+
+### Caching
+
+Enable caching to improve performance for frequently accessed settings:
+
+**Configuration in `.env`:**
+
+```env
+SETTINGS_CACHE_ENABLED=true
+SETTINGS_CACHE_TTL=3600
+```
+
+**Or in `config/settings.php`:**
+
+```php
+return [
+    'cache' => [
+        'enabled' => true,
+        'ttl' => 3600, // Cache duration in seconds
+    ],
+    
+    // ... rest of your settings
+];
+```
+
+**How it works:**
+
+- When enabled, all `get()`, `getAllScoped()`, and `getFiltered()` operations are cached
+- Cache is automatically invalidated when settings are updated via `set()`
+- Works with all Laravel cache drivers (Redis, Memcached, File, etc.)
+- Each setting is cached independently with a unique key
+- TTL (Time To Live) is configurable per your needs
+
+**Performance Impact:**
+
+With caching enabled, repeated reads of the same setting can be 10-100x faster, depending on your cache driver and database load.
 
 <small>[Back to top](#table-of-contents)</small>
 

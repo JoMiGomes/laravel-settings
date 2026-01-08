@@ -16,6 +16,32 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 - Upcoming fixes
 
+## [2.1.0] - TBD
+
+### Added
+- **Events System**: Fire events on setting lifecycle operations
+  - `SettingRetrieved` - Fired when a setting is accessed
+  - `SettingCreated` - Fired when a new setting is stored
+  - `SettingUpdated` - Fired when an existing setting changes
+  - `SettingDeleted` - Fired when a setting reverts to default
+  - All events include previous value tracking for auditing
+- **Settings Facade**: Cleaner API syntax with `Settings::get()` instead of `Setting::get()`
+  - Auto-registered via Laravel package discovery
+  - Full IDE support with PHPDoc annotations
+- **Artisan Commands**: CLI tools for settings management
+  - `settings:list` - View all settings or filter by scope/group
+  - `settings:clear` - Reset customized settings to defaults
+  - Both commands support filtering and confirmation prompts
+- **Caching Layer**: Optional performance optimization
+  - Configurable via `SETTINGS_CACHE_ENABLED` environment variable
+  - Adjustable TTL via `SETTINGS_CACHE_TTL` (default: 3600 seconds)
+  - Automatic cache invalidation on updates
+  - Works with all Laravel cache drivers
+
+### Changed
+- Service provider now conditionally registers cached service implementation
+- Configuration file includes new cache settings section
+
 ## [2.0.0] - TBD
 
 ### Breaking
