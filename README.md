@@ -1,5 +1,9 @@
 # Laravel Settings Package
 
+[![Latest Version](https://img.shields.io/packagist/v/jomigomes/laravel-settings.svg?style=flat-square)](https://packagist.org/packages/jomigomes/laravel-settings)
+[![Total Downloads](https://img.shields.io/packagist/dt/jomigomes/laravel-settings.svg?style=flat-square)](https://packagist.org/packages/jomigomes/laravel-settings)
+[![License](https://img.shields.io/packagist/l/jomigomes/laravel-settings.svg?style=flat-square)](https://packagist.org/packages/jomigomes/laravel-settings)
+
 A flexible Laravel package for managing scoped, typed settings with a manifesto-based configuration approach.
 
 ## Features
