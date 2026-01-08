@@ -16,6 +16,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 - Upcoming fixes
 
+## [2.1.1] - 2025-01-08
+
+### Added
+- Support for Laravel 12.x
+- Support for PHP 8.4
+
+### Changed
+- Extended `illuminate/database` and `illuminate/support` version constraints to include `^12.0`
+- Extended `orchestra/testbench` version constraint to include `^10.0`
+
 ## [2.1.0] - 2025-01-08
 
 ### Added
