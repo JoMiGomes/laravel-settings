@@ -5,6 +5,10 @@ namespace YellowParadox\LaravelSettings\Services;
 use YellowParadox\LaravelSettings\Contracts\SettingValidatorInterface;
 use YellowParadox\LaravelSettings\Contracts\SettingsRepositoryInterface;
 use YellowParadox\LaravelSettings\DataTransferObjects\SettingData;
+use YellowParadox\LaravelSettings\Events\SettingCreated;
+use YellowParadox\LaravelSettings\Events\SettingDeleted;
+use YellowParadox\LaravelSettings\Events\SettingRetrieved;
+use YellowParadox\LaravelSettings\Events\SettingUpdated;
 use YellowParadox\LaravelSettings\Models\Setting;
 use YellowParadox\LaravelSettings\Traits\HasSettings;
 use Illuminate\Database\Eloquent\Model;
@@ -31,18 +35,25 @@ class SettingsService
                 $settingModel->value = Carbon::parse($settingModel->value);
             }
 
-            return SettingData::fromModel($settingModel);
+            $settingData = SettingData::fromModel($settingModel);
+            event(new SettingRetrieved($settingData));
+            
+            return $settingData;
         }
 
         $defaultValue = $this->repository->getDefaultFromConfig($setting, $scopeString);
 
         if ($defaultValue !== null) {
-            return SettingData::fromConfig(
+            $settingData = SettingData::fromConfig(
                 $setting,
                 $settingKey['type'],
                 $defaultValue['value'],
                 $scopeString
             );
+            
+            event(new SettingRetrieved($settingData));
+            
+            return $settingData;
         }
 
         return null;
@@ -52,8 +63,14 @@ class SettingsService
     {
         [$scopeString, $settingKey, $defaultValue] = $this->validator->validate($setting, $this->getScopeString($scope), $newValue);
 
+        $existingSetting = $this->repository->find($setting, $scope);
+        $previousValue = $existingSetting ? $existingSetting->value : $defaultValue;
+
         if ($newValue === $defaultValue) {
-            $this->repository->delete($setting, $scope);
+            if ($existingSetting) {
+                $this->repository->delete($setting, $scope);
+                event(new SettingDeleted($setting, $scopeString, $previousValue));
+            }
 
             return SettingData::fromConfig(
                 $setting,
@@ -71,7 +88,15 @@ class SettingsService
             $scopeString
         );
 
-        return SettingData::fromModel($settingModel);
+        $settingData = SettingData::fromModel($settingModel);
+        
+        if ($existingSetting) {
+            event(new SettingUpdated($settingData, $previousValue));
+        } else {
+            event(new SettingCreated($settingData, $previousValue));
+        }
+
+        return $settingData;
     }
 
     public function getAllScoped(Model|string $scope): Collection
