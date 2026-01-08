@@ -715,7 +715,6 @@ Congratulations! You've now explored the ins and outs of our Settings Feature, g
   
 As you embark on implementing the Settings Feature in your Laravel project, don't forget to leverage the power of scoping settings for a more organized and streamlined configuration management.  
   
-For any additional questions or clarifications, feel free to refer to this documentation or reach out to our dedicated support team.  
   
 Thank you for choosing our Settings Feature. We hope it brings clarity, structure, and efficiency to your application configurations. Happy coding!  
   
