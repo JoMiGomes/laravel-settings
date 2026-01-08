@@ -8,21 +8,36 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
-- Initial release of Laravel Settings package
-- Scoped settings support (model-related and non-model scopes)
-- Type-safe settings with automatic casting
-- Manifesto-based configuration approach
-- Support for 8 data types: integer, double, boolean, string, array, collection, datetime, object
-- HasSettings trait for easy model integration
-- Comprehensive test suite
-- Full documentation
+- Upcoming improvements
 
-### Features
-- Default values stored in config to prevent database clutter
-- Nested groups support with dot notation access
-- Filtered settings retrieval
-- Automatic type validation
-- Laravel auto-discovery support
+### Changed
+- Upcoming breaking changes
+
+### Fixed
+- Upcoming fixes
+
+## [2.0.0] - TBD
+
+### Breaking
+- `Setting::get`, `Setting::set`, `Setting::getAllScoped`, `Setting::getFiltered`, and the `HasSettings` trait helpers now return `SettingData` DTOs instead of `stdClass`/`Setting` models.
+- Introduced service, repository, and validator layers behind dependency injection bindings, removing the deprecated `BaseSetting` class.
+
+### Added
+- `SettingData` immutable DTO to provide consistent object-like behaviour for default and persisted settings.
+- `SettingsRepository`, `SettingsService`, and `SettingValidator` layers with contracts for clean architecture and easier testing.
+- Database indexes for `scope`, `setting`, and polymorphic columns to improve query performance.
+- Secure `SecureDynamicTypeCasting` cast that uses JSON-based serialization for objects.
+- Extensive feature tests for model and non-model scopes, plus validator unit tests.
+- `REFACTORING_SUMMARY.md` documenting the new architecture.
+
+### Changed
+- Service provider now registers repository/service/validator bindings and publishes a timestamped migration.
+- Migration file published with indexes; legacy `.stub` kept for BC but not auto-loaded.
+- Documentation updated to reflect new architecture and DTO return type.
+
+### Fixed
+- Removed insecure `unserialize` usage when casting objects.
+- Ensured default and persisted settings share the same API surface via DTOs.
 
 ## [1.0.0] - TBD
 

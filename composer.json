@@ -1,6 +1,7 @@
 {
     "name": "jomigomes/laravel-settings",
     "description": "A flexible Laravel package for managing scoped, typed settings with a manifesto-based configuration approach",
+    "version": "2.0.0",
     "type": "library",
     "license": "MIT",
     "keywords": [
